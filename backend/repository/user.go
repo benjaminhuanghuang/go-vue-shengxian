@@ -77,6 +77,11 @@ func(repo *UserRepository) ExistByUserId(id string) *model.User{
 	repo.DB.Where( "user_id", id).Find(&user)
 	return &user
 }
+func(repo *UserRepository) ExistByMobil(id string) *model.User{
+	var user model.User
+	repo.DB.Where( "user_id", id).Find(&user)
+	return &user
+}
 
 func(repo *UserRepository) Add(user model.User)(*model.User, error){
 	if exist != repo.Exist(user); exist != nil {
@@ -89,7 +94,7 @@ func(repo *UserRepository) Add(user model.User)(*model.User, error){
 	return &user, nil
 }
 
-func(repo *UserRepository) Edit (usesr model.User)(bool, error){
+func(repo *UserRepository) Edit (user model.User)(bool, error){
 	repo.DB.Model(&user).Where("user_id=?", user.UserID).Updates(map[string]interface{}{
 		"nick_name":user.NickName,
 		"mobile":user.Mobile,
@@ -101,7 +106,7 @@ func(repo *UserRepository) Edit (usesr model.User)(bool, error){
 	return true, nil
 }
 
-func(repo *UserRepository) Delete (usesr model.User)(bool, error){
+func(repo *UserRepository) Delete (user model.User)(bool, error){
 	repo.DB.Model(&user).Where("user_id=?", user.UserID).Updates(map[string]interface{}{
 		"is_deleted":user.isDeleted
 	}).Error
