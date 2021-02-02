@@ -15,7 +15,7 @@ type CategoryRepoInterface interface {
 	List(req *query.ListQuery) (categories []model.CategoryResult, err error)
 	GetTotal(req *query.ListQuery) (total int64, err error)
 	Get(id string) ([] *model.CategoryResult, err error)
-	Exist(category model.Category) (*model.Category, err error)
+	Exist(category model.Category) *model.Category
 	ExistByCategoryId(id string) (*model.Category, err error)
 	Add(category model.Category) (*model.Category, err error)
 	Edit(category model.Category)(bool, error)
